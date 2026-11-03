@@ -122,6 +122,7 @@ start_build_process() {
     rm -rf hardware/sony
     rm -rf vendor/sony
     rm -rf vendor/lineage-priv
+    rm -rf vendor/lunaris/dolby
 
     echo "Set github account.."
     git config --global user.name "aoitsme"
@@ -160,10 +161,11 @@ start_build_process() {
     git clone https://github.com/aoitsme/proprietary_vendor_sony_"$DEVICE_CODE" -b lineage-23.2 vendor/sony/"$DEVICE_CODE"
     git clone https://github.com/aoitsme/proprietary_vendor_sony_tama-common -b lineage-23.2 vendor/sony/tama-common
     git clone https://github.com/aoitsme/keys -b master vendor/lineage-priv
+    git clone https://github.com/tranQuila-Project/vendor_lunaris_dolby vendor/lunaris/dolby
     
     echo "Starting ROM build..."
     . build/envsetup.sh
-    export WITH_GMS=false
+    export WITH_GMS=true
     lunch clover_"$DEVICE_CODE"-bp4a-userdebug
     mka clover
 
